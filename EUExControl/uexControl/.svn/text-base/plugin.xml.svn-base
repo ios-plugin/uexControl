@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<uexplugins>
+    <plugin name="uexControl">
+        <method name="openDatePicker"></method>
+        <method name="openDatePickerWithoutDay"></method>
+		<method name="openTimePicker"></method>
+        <method name="openInputDialog"></method>
+	</plugin>
+</uexplugins>
