@@ -28,4 +28,8 @@
 @property (nonatomic, retain) UIButton * cancle;
 @property (nonatomic, retain) UIButton * confirm;
 @property (nonatomic, assign) CAGradientLayer * lay;
+
+@property (nonatomic, retain) UILabel * canLabel;
+@property (nonatomic, retain) UILabel *conLabel;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "HeaderView.h"
 #import "EUtility.h"
+#import "EUExControl.h"
 
 @implementation HeaderView
 @synthesize delegate,cancle,confirm,lay;
@@ -41,10 +42,19 @@
         }
         ////取消按钮
 		UILabel * canLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 2.5, 35, 25)];
+        
+        //默认设置“取消”，”确认”按钮颜色为"#007aff"
+        NSString *colorStr = @"#007aff";
+        
 		canLabel.text = @"取消";
-		canLabel.textColor = [UIColor whiteColor];
+		canLabel.textColor = [UIColor blackColor];
 		canLabel.font = [UIFont systemFontOfSize:12.0];
+
+        canLabel.textColor = [EUtility ColorFromString:colorStr];
+ 		canLabel.font = [UIFont systemFontOfSize:16.0f];
+
 		[canLabel setBackgroundColor:[UIColor clearColor]];
+        self.canLabel = canLabel;
 		
 		cancle = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 41, 30)];
 		[cancle setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
@@ -54,9 +64,13 @@
 		/////////确定按钮
 		UILabel *conLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 2.5, 35, 25)];
 		conLabel.text = @"完成";
-		conLabel.textColor = [UIColor whiteColor];
+		conLabel.textColor = [UIColor blackColor];
 		conLabel.font = [UIFont systemFontOfSize:12.0];
+        conLabel.textColor = [EUtility ColorFromString:colorStr];
+ 		conLabel.font = [UIFont systemFontOfSize:16.0f];
 		[conLabel setBackgroundColor:[UIColor clearColor]];
+        self.conLabel = conLabel;
+        
 		confirm = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width-46, 5, 41, 30)];
 		[confirm setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
 		[confirm addTarget:self action:@selector(confirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -81,6 +95,7 @@
 	}
 }
 
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -93,6 +108,8 @@
     self.cancle = nil;
     self.confirm = nil;
     self.lay = nil;
+    self.canLabel = nil;
+    self.conLabel = nil;
     [super dealloc];
 }
 

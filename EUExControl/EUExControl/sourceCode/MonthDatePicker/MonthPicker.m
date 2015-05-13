@@ -57,12 +57,12 @@
     }
     UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (deviceOrientation == UIInterfaceOrientationPortrait||deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, 320, MAIN_HEIGHT)];
-        [toolView setFrame:CGRectMake(0, 0, 320, 40)];
-        [toolView.lay setFrame:CGRectMake(0, 0, 320, 40)];
+        [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT,SCREEN_WIDTH, MAIN_HEIGHT)];
+        [toolView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        [toolView.lay setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
         [toolView.cancle setFrame:CGRectMake(5, 5, 41, 30)];
-        [toolView.confirm setFrame:CGRectMake(320 - 46, 5, 41, 30)];
-        [monthPcikerView setFrame:CGRectMake(0, 40, 320, MAIN_HEIGHT-40)];
+        [toolView.confirm setFrame:CGRectMake(SCREEN_WIDTH - 46, 5, 41, 30)];
+        [monthPcikerView setFrame:CGRectMake(0, 40, SCREEN_WIDTH, MAIN_HEIGHT-40)];
     }else if (deviceOrientation == UIInterfaceOrientationLandscapeLeft||deviceOrientation==UIInterfaceOrientationLandscapeRight){
         [mainView setFrame:CGRectMake(0, 300-MAIN_HEIGHT, [EUtility screenHeight], MAIN_HEIGHT)];
         [toolView setFrame:CGRectMake(0, 0, [EUtility screenHeight], 40)];
@@ -88,10 +88,10 @@
     
     UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if ([EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0, [EUtility screenHeight], 320, MAIN_HEIGHT)] autorelease];
-        self.toolView = [[[HeaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)] autorelease];
+        self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0, [EUtility screenHeight], SCREEN_WIDTH, MAIN_HEIGHT)] autorelease];
+        self.toolView = [[[HeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)] autorelease];
         self.monthPcikerView = [[[CDatePickerViewEx alloc] init] autorelease];
-        [monthPcikerView setFrame:CGRectMake(0, 40, 320, MAIN_HEIGHT-40)];
+        [monthPcikerView setFrame:CGRectMake(0, 40, SCREEN_WIDTH, MAIN_HEIGHT-40)];
     }else {
         self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0, 300-MAIN_HEIGHT, [EUtility screenHeight], MAIN_HEIGHT)] autorelease];
         self.toolView = [[[HeaderView alloc] initWithFrame:CGRectMake(0, 0,[EUtility screenHeight], 40)] autorelease];
@@ -119,7 +119,7 @@
         if (euexObj.meBrwView) {
             if (![EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
                 [UIView animateWithDuration:0.3 animations:^{
-                    [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, 320, MAIN_HEIGHT)];
+                    [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, SCREEN_WIDTH, MAIN_HEIGHT)];
                 }];
             }
             [(UIView*)euexObj.meBrwView setUserInteractionEnabled:NO];
@@ -132,7 +132,7 @@
         self.popController = popover;
         [popover release];
         
-        [popController setPopoverContentSize:CGSizeMake(320, MAIN_HEIGHT)];
+        [popController setPopoverContentSize:CGSizeMake(SCREEN_WIDTH, MAIN_HEIGHT)];
         [popController setDelegate:self];
         //让pop窗口的位置在中间
         int x = SCREEN_WIDTH/2;

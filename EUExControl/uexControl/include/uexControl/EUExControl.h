@@ -33,7 +33,6 @@
 @property (nonatomic, retain) InputDialog * inputObj;
 @property (nonatomic, assign) BOOL isDataPickerDidOpen;
 
-
 -(void)uexOpenDatePickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData;
 -(void)uexOpenMonthPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData;
 -(void)uexOpenTimerPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData;

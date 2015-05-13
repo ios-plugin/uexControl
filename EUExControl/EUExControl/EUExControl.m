@@ -22,6 +22,59 @@
 	return self;
 }
 
+- (UIColor *)stringToColor:(NSString *)aString{
+    if ([aString isKindOfClass:[NSString class]] && aString.length > 0) {
+        UIColor *color = [EUtility ColorFromString:aString];
+        return color;
+    }else{
+        return nil;
+    }
+}
+
+-(void)setDatePickerConfirmBtnColor:(NSMutableArray *)inArguments{
+    
+    if ([inArguments count] <= 0) {
+        
+        return;
+    }
+
+    NSString * jsonStr = [inArguments objectAtIndex:0];
+    NSMutableDictionary * jsDic = [jsonStr JSONValue];
+    
+    NSString * titleColor = [jsDic objectForKey:@"leftBtnTitleColor"];
+    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
+        self.dateObj.toolView.canLabel.textColor = [self stringToColor:titleColor];
+    }
+    
+    titleColor = [jsDic objectForKey:@"rightBtnTitleColor"];
+    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
+        self.dateObj.toolView.conLabel.textColor = [self stringToColor:titleColor];
+    }
+}
+
+-(void)setDatePickerWithoutDayConfirmBtnColor:(NSMutableArray *)inArguments{
+    
+    if ([inArguments count] <= 0) {
+        
+        return;
+    }
+    
+    NSString * jsonStr = [inArguments objectAtIndex:0];
+    NSMutableDictionary * jsDic = [jsonStr JSONValue];
+    
+    
+    NSString * titleColor = [jsDic objectForKey:@"leftBtnTitleColor"];
+    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
+        self.monthObj.toolView.canLabel.textColor = [self stringToColor:titleColor];
+    }
+    
+    titleColor = [jsDic objectForKey:@"rightBtnTitleColor"];
+    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
+        self.monthObj.toolView.conLabel.textColor = [self stringToColor:titleColor];
+    }
+}
+
+
 -(void)clean{
 	if (dateObj) {
         self.dateObj = nil;

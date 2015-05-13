@@ -5,5 +5,7 @@
         <method name="openDatePickerWithoutDay"></method>
 		<method name="openTimePicker"></method>
         <method name="openInputDialog"></method>
+        <method name="setDatePickerConfirmBtnColor"></method>
+        <method name="setDatePickerWithoutDayConfirmBtnColor"></method>
 	</plugin>
 </uexplugins>
