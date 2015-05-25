@@ -57,7 +57,7 @@
         self.canLabel = canLabel;
 		
 		cancle = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 41, 30)];
-		[cancle setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
+		//[cancle setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
 		[cancle addTarget:self action:@selector(cancleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 		[cancle addSubview:canLabel];
 		[canLabel release];
@@ -72,7 +72,7 @@
         self.conLabel = conLabel;
         
 		confirm = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width-46, 5, 41, 30)];
-		[confirm setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
+		//[confirm setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
 		[confirm addTarget:self action:@selector(confirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 		[confirm addSubview:conLabel];
 		[conLabel release];
