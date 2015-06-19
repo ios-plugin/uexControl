@@ -77,26 +77,24 @@
 
 -(void)clean{
 	if (dateObj) {
-        self.dateObj = nil;
+        [[NSNotificationCenter defaultCenter] removeObserver:dateObj];
+        [dateObj release];
+        dateObj = nil;
 	}
     if(monthObj){
-        self.monthObj = nil;
+        [[NSNotificationCenter defaultCenter] removeObserver:monthObj];
+        [monthObj release];
+        monthObj = nil;
     }
-	if (inputObj) {
-        self.inputObj = nil;
+    if (inputObj) {
+        [[NSNotificationCenter defaultCenter] removeObserver:inputObj];
+        [inputObj release];
+        inputObj = nil;
 	}
 }
 
 -(void)dealloc{
-	if (dateObj) {
-        self.dateObj = nil;
-	}
-    if(monthObj){
-        self.monthObj = nil;
-    }
-	if (inputObj) {
-        self.inputObj = nil;
-	}
+    [self clean];
 	[super dealloc];
 }
 
@@ -188,13 +186,10 @@
     if ([inYear isEqualToString:@""]||[inMonth isEqualToString:@""]) {
         inDate = [NSDate date];
     }else {
-        //		NSLog(@"[control opendatePicker");
         NSString *dateStr = [NSString stringWithFormat:@"%@-%@",inYear,inMonth];
-        //		 NSLog(@"datestr = %@",dateStr);
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"yyyy-MM"];
         inDate = [df dateFromString:dateStr];
-        //		 NSLog(@"inldate = %@",inDate);
         [df release];
     }
     if (inDate == nil) {
@@ -250,7 +245,6 @@
 -(void)uexOpenMonthPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData{
     inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [self jsSuccessWithName:@"uexControl.cbOpenDatePickerWithoutDay" opId:inOpId dataType:inDataType strData:inData];
-    NSLog(@"%@",inData);
 }
 -(void)uexOpenTimerPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData{
 	inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

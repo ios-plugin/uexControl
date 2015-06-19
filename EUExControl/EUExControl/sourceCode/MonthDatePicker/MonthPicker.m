@@ -25,11 +25,18 @@
 @synthesize popController;
 
 -(id)initWithEuex:(EUExControl *)euexObj_{
-    self.euexObj = euexObj_;
+    
+    if (self = [super init]) {
+        
+        self.euexObj = euexObj_;
+        
+    }
+    
     return self;
+    
 }
+
 -(void)setResultFormat:(NSDate *)inDate{
-    NSLog(@"DatePicker setResultFormat start");
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
     NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit |
@@ -45,7 +52,6 @@
     [selectValue setObject:[NSNumber numberWithInt:year] forKey:UEX_JKYEAR];
     [selectValue setObject:[NSNumber numberWithInt:month] forKey:UEX_JKMONTH];
 
-    NSLog(@"DatePicker setResultFormat end");
 }
 - (void)changeDate:(id)sender{
     NSDate *checkDate = monthPcikerView.resultDate;
@@ -55,6 +61,11 @@
     if ([EUtility isIpad]) {
         return;
     }
+    
+    if (![mainView isKindOfClass:[UIView class]] || ![toolView isKindOfClass:[HeaderView class]] || ![monthPcikerView isKindOfClass:[CDatePickerViewEx class]]) {
+        return;
+    }
+    
     UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (deviceOrientation == UIInterfaceOrientationPortrait||deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT,SCREEN_WIDTH, MAIN_HEIGHT)];
@@ -74,7 +85,6 @@
 }
 
 -(void)showMonthPickerWithType:(int)type date:(NSDate *)inDate{
-    NSLog(@"DatePicker showMonthPickerWithType start");
     if (mainView) {
         return;
     }
@@ -180,7 +190,6 @@
     NSDate *checkDate = monthPcikerView.resultDate;
     [self setResultFormat:checkDate];
     
-    //	NSLog(@"selectValue = %@",[selectValue description]);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 //    if ([pickerType intValue]==0) {
 //        [euexObj uexOpenDatePickerWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_JSON data:[selectValue JSONFragment]];
@@ -206,28 +215,27 @@
 }
 
 -(void)dealloc{
-    NSLog(@"hui--->DatePicker dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     if (popController) {
-        NSLog(@"hui--->DatePicker dealloc self.popController retaincount is %d",[self.popController retainCount]);
-        self.popController = nil;
+        [popController release];
+        popController = nil;
     }
     if (monthPcikerView) {
-        NSLog(@"hui--->DatePicker dealloc pickerView");
-        self.monthPcikerView = nil;
+        [monthPcikerView release];
+        monthPcikerView = nil;
     }
     if (toolView) {
-        NSLog(@"hui--->DatePicker dealloc toolView");
-        self.toolView.delegate = nil;
-        self.toolView = nil;
+        toolView.delegate = nil;
+        [toolView release];
+        toolView = nil;
     }
     if (mainView) {
-        NSLog(@"hui--->DatePicker dealloc mainView");
-        self.mainView = nil;
+        [mainView release];
+        mainView = nil;
     }
     if (selectValue) {
-        NSLog(@"hui--->DatePicker dealloc selectValue");
-        self.selectValue = nil;
+        [selectValue release];
+        selectValue = nil;
     }
     [super dealloc];
 }
