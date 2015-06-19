@@ -222,7 +222,6 @@
 }
 
 - (void)PLGrowingTextViewDidEndEditing:(PLGrowingTextView *)PLGrowingTextView{
-        NSLog(@"PLGrowingTextViewDidEndEditing");
     if (_delegate&&[_delegate respondsToSelector:@selector(inputDialogClose)]) {
         [_delegate inputDialogClose];
     }
@@ -240,6 +239,12 @@
     r.origin.y += diff;
 	self.frame = r;
 }
+
+-(void)dealloc {
+    [self removeKeyboardNotifucations];
+    [super dealloc];
+}
+
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

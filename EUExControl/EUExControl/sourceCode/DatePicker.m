@@ -27,8 +27,15 @@
 @synthesize popController;
 
 -(id)initWithEuex:(EUExControl *)euexObj_{
-    self.euexObj = euexObj_;
+    
+    if (self = [super init]) {
+        
+        self.euexObj = euexObj_;
+        
+    }
+    
 	return self;
+    
 }
 
 -(void)setResultFormat:(NSDate *)inDate{
@@ -64,6 +71,11 @@
 	if ([EUtility isIpad]) {
 		return;
 	}
+    
+    if (![mainView isKindOfClass:[UIView class]] || ![toolView isKindOfClass:[HeaderView class]] || ![pickerView isKindOfClass:[UIDatePicker class]]) {
+        return;
+    }
+    
 	UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 	if (deviceOrientation == UIInterfaceOrientationPortrait||deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
 		[mainView setFrame:CGRectMake(0, [EUtility screenHeight] - MAIN_HEIGHT, 320*APP_DEVICERATIO, MAIN_HEIGHT)];
@@ -208,20 +220,25 @@
 -(void)dealloc{
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 	if (popController) {
-        self.popController = nil;
+        [popController release];
+        popController = nil;
 	}
     if (pickerView) {
-        self.pickerView = nil;
+        [pickerView release];
+        pickerView = nil;
     }
 	if (toolView) {
-        self.toolView.delegate = nil;
-        self.toolView = nil;
+        toolView.delegate = nil;
+        [toolView release];
+        toolView = nil;
 	}
-	if (mainView) {
-        self.mainView = nil;
+    if (mainView) {
+        [mainView release];
+        mainView = nil;
 	}
-	if (selectValue) {
-        self.selectValue = nil;
+    if (selectValue) {
+        [selectValue release];
+        selectValue = nil;
 	}
 	[super dealloc];
 }

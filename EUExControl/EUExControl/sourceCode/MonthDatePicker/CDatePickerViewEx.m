@@ -243,10 +243,8 @@ const NSInteger numberOfComponents = 2;
     
     
     if (component == 1) {
-        NSLog(@"%@",[self.months objectAtIndex:row%12]);
         _components.month = [[self.months objectAtIndex:row%12] integerValue];
     }else{
-        NSLog(@"%@",[self.years objectAtIndex:row%(self.years.count)]);
         _components.year = [[self.years objectAtIndex:row%(self.years.count)] integerValue];
     }
      _resultDate = [[NSCalendar currentCalendar] dateFromComponents:_components];

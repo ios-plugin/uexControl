@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexControl" version="3.0.9" build="9">
-        <info>9:新增一个接口 允许设置取消按钮和确认按钮的标题字体颜色</info>
+        uexName="uexControl" version="3.0.10" build="10">
+        <info>10:修复doRotate时的崩溃问题</info>
+        <build>9:新增一个接口 允许设置取消按钮和确认按钮的标题字体颜色</build>
         <build>8:新增一个接口 只要年月</build>
         <build>7:uexControl插件适配iphone6和6+</build>
         <build>6:同一时间只允许打开一个picker</build>
