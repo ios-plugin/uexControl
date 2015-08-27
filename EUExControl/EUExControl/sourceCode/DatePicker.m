@@ -68,15 +68,27 @@
 }
 
 -(void)doRotate{
-	if ([EUtility isIpad]) {
-		return;
-	}
+    
+	
     
     if (![mainView isKindOfClass:[UIView class]] || ![toolView isKindOfClass:[HeaderView class]] || ![pickerView isKindOfClass:[UIDatePicker class]]) {
         return;
     }
     
-	UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if ([EUtility isIpad]) {
+        [mainView setFrame:CGRectMake(0, [EUtility screenHeight] - MAIN_HEIGHT, 320*APP_DEVICERATIO, MAIN_HEIGHT)];
+        [toolView setFrame:CGRectMake(0, 0, 320*APP_DEVICERATIO, 40)];
+        [toolView.lay setFrame:CGRectMake(0, 0, 320*APP_DEVICERATIO, 40)];
+        [toolView.cancle setFrame:CGRectMake(5, 5, 41, 30)];
+        [toolView.confirm setFrame:CGRectMake(320*APP_DEVICERATIO - 46, 5, 41, 30)];
+        [pickerView setFrame:CGRectMake(0, 40, 320*APP_DEVICERATIO, MAIN_HEIGHT-40)];
+        return;
+    }
+    
+    
+    
+    
 	if (deviceOrientation == UIInterfaceOrientationPortrait||deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
 		[mainView setFrame:CGRectMake(0, [EUtility screenHeight] - MAIN_HEIGHT, 320*APP_DEVICERATIO, MAIN_HEIGHT)];
 		[toolView setFrame:CGRectMake(0, 0, 320*APP_DEVICERATIO, 40)];
@@ -133,7 +145,7 @@
 	if (![EUtility isIpad] || SCREEN_WIDTH == 320*APP_DEVICERATIO) {
         [EUtility brwView:euexObj.meBrwView addSubview:mainView];
         if (euexObj.meBrwView) {
-            if (![EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+            if ([EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
                 [UIView animateWithDuration:0.3 animations:^{
                     [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, 320*APP_DEVICERATIO, MAIN_HEIGHT)];
                 }];

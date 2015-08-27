@@ -58,13 +58,23 @@
     [self setResultFormat:checkDate];
 }
 -(void)doRotate{
-    if ([EUtility isIpad]) {
-        return;
-    }
-    
     if (![mainView isKindOfClass:[UIView class]] || ![toolView isKindOfClass:[HeaderView class]] || ![monthPcikerView isKindOfClass:[CDatePickerViewEx class]]) {
         return;
     }
+
+    
+    if ([EUtility isIpad]) {
+        [mainView setFrame:CGRectMake(0, [EUtility screenHeight] - MAIN_HEIGHT, 320*APP_DEVICERATIO, MAIN_HEIGHT)];
+        [toolView setFrame:CGRectMake(0, 0, 320*APP_DEVICERATIO, 40)];
+        [toolView.lay setFrame:CGRectMake(0, 0, 320*APP_DEVICERATIO, 40)];
+        [toolView.cancle setFrame:CGRectMake(5, 5, 41, 30)];
+        [toolView.confirm setFrame:CGRectMake(320*APP_DEVICERATIO - 46, 5, 41, 30)];
+        [monthPcikerView setFrame:CGRectMake(0, 40, 320*APP_DEVICERATIO, MAIN_HEIGHT-40)];
+        return;
+    }
+    
+    
+
     
     UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (deviceOrientation == UIInterfaceOrientationPortrait||deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
@@ -149,7 +159,7 @@
         int y = (SCREEN_HEIGHT-20)/2;
         [EUtility brwView:euexObj.meBrwView presentPopover:popController FromRect:CGRectMake(x, y, 10, 10) permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
     
 }
 
