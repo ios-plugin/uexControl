@@ -13,7 +13,7 @@
 @implementation HeaderView
 @synthesize delegate,cancle,confirm,lay;
  
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame andExtras:(NSDictionary *)extras{
     self = [super initWithFrame:frame];
     if (self) {
 		self.alpha = 0.8;
@@ -44,13 +44,21 @@
 		UILabel * canLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 2.5, 35, 25)];
         
         //默认设置“取消”，”确认”按钮颜色为"#007aff"
-        NSString *colorStr = @"#007aff";
+         NSString *cancleColorStr = @"#007aff";
+        NSString *confirmColorStr = @"#007aff";
+        //自定义
+        if(extras&&[extras objectForKey:@"cancleBottonColor"]){
+            cancleColorStr=[extras objectForKey:@"cancleBottonColor"];
+        }
+        if(extras&&[extras objectForKey:@"confirmBottonColor"]){
+            confirmColorStr=[extras objectForKey:@"confirmBottonColor"];
+        }
         
 		canLabel.text = @"取消";
 		canLabel.textColor = [UIColor blackColor];
 		canLabel.font = [UIFont systemFontOfSize:12.0];
 
-        canLabel.textColor = [EUtility ColorFromString:colorStr];
+        canLabel.textColor = [EUtility ColorFromString:cancleColorStr];
  		canLabel.font = [UIFont systemFontOfSize:16.0f];
 
 		[canLabel setBackgroundColor:[UIColor clearColor]];
@@ -66,7 +74,7 @@
 		conLabel.text = @"完成";
 		conLabel.textColor = [UIColor blackColor];
 		conLabel.font = [UIFont systemFontOfSize:12.0];
-        conLabel.textColor = [EUtility ColorFromString:colorStr];
+        conLabel.textColor = [EUtility ColorFromString:confirmColorStr];
  		conLabel.font = [UIFont systemFontOfSize:16.0f];
 		[conLabel setBackgroundColor:[UIColor clearColor]];
         self.conLabel = conLabel;

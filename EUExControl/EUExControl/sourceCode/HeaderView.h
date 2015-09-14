@@ -32,4 +32,8 @@
 @property (nonatomic, retain) UILabel * canLabel;
 @property (nonatomic, retain) UILabel *conLabel;
 
+
+
+
+-(instancetype)initWithFrame:(CGRect)frame andExtras:(NSDictionary *)extras;
 @end
