@@ -25,6 +25,7 @@
 		3CFA559518C07E0500B636E9 /* PLGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA558E18C07E0500B636E9 /* PLGrowingTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3CFA559618C07E0500B636E9 /* PLTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA559018C07E0500B636E9 /* PLTextViewInternal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3CFA559818C07E1100B636E9 /* libAppCanEngine_IOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA559718C07E1100B636E9 /* libAppCanEngine_IOS.a */; };
+		4201D7611BA6A0C4007D6036 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4201D7601BA6A0C4007D6036 /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +79,7 @@
 		3CFA558F18C07E0500B636E9 /* PLTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTextViewInternal.h; sourceTree = "<group>"; };
 		3CFA559018C07E0500B636E9 /* PLTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTextViewInternal.m; sourceTree = "<group>"; };
 		3CFA559718C07E1100B636E9 /* libAppCanEngine_IOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAppCanEngine_IOS.a; path = ../libAppCanEngine_IOS.a; sourceTree = "<group>"; };
+		4201D7601BA6A0C4007D6036 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4201D7611BA6A0C4007D6036 /* ImageIO.framework in Frameworks */,
 				3CFA559818C07E1100B636E9 /* libAppCanEngine_IOS.a in Frameworks */,
 				3CFA557618C07DD700B636E9 /* CoreTelephony.framework in Frameworks */,
 				3CFA557418C07DBB00B636E9 /* AudioToolbox.framework in Frameworks */,
@@ -132,6 +135,7 @@
 		3CFA551E18C07CA300B636E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4201D7601BA6A0C4007D6036 /* ImageIO.framework */,
 				3CFA559718C07E1100B636E9 /* libAppCanEngine_IOS.a */,
 				3CFA557518C07DD700B636E9 /* CoreTelephony.framework */,
 				3CFA557318C07DBB00B636E9 /* AudioToolbox.framework */,
