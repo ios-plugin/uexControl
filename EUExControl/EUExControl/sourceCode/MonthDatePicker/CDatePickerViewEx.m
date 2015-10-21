@@ -309,8 +309,8 @@ const NSInteger numberOfComponents = 2;
 }
 
 -(NSArray *)nameOfMonths
-{
-    return @[@"1月", @"2月", @"3月", @"4月", @"5月", @"6月", @"7月", @"8月", @"9月", @"10月", @"11月", @"12月"];
+{ 
+    return @[UEX_LOCALIZEDSTRING(@"1月"),UEX_LOCALIZEDSTRING(@"2月"),UEX_LOCALIZEDSTRING(@"3月"),UEX_LOCALIZEDSTRING(@"4月"),UEX_LOCALIZEDSTRING(@"5月"),UEX_LOCALIZEDSTRING(@"6月"),UEX_LOCALIZEDSTRING(@"7月"),UEX_LOCALIZEDSTRING(@"8月"),UEX_LOCALIZEDSTRING(@"9月"),UEX_LOCALIZEDSTRING(@"10月"),UEX_LOCALIZEDSTRING(@"11月"),UEX_LOCALIZEDSTRING(@"12月")];
 }
 
 -(NSArray *)nameOfYears
@@ -319,7 +319,7 @@ const NSInteger numberOfComponents = 2;
     
     for(NSInteger year = self.minYear; year <= self.maxYear; year++)
     {
-        NSString *yearStr = [NSString stringWithFormat:@"%li年", (long)year];
+        NSString *yearStr = [NSString stringWithFormat:UEX_LOCALIZEDSTRING(@"%li年"), (long)year];
         [years addObject:yearStr];
     }
     return years;
@@ -332,9 +332,9 @@ const NSInteger numberOfComponents = 2;
     
     NSString *month = [self currentMonthName];
 
-    month = [NSString stringWithFormat:@"%@月",month];
+    month = [NSString stringWithFormat:UEX_LOCALIZEDSTRING(@"%@月"),month];
     NSString *year  = [self currentYearName];
-    year = [NSString stringWithFormat:@"%@年",year];
+    year = [NSString stringWithFormat:UEX_LOCALIZEDSTRING(@"%@年"),year];
 
     //set table on the middle
     for(NSString *cellMonth in self.months)

@@ -3,8 +3,12 @@
 //
 //  The contents of this file are implicitly included at the beginning of every source file.
 //
-
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "EUtility.h"
+#define UEX_LOCALIZEDSTRING(...) [EUtility uexPlugin:@"uexControl" localizedString:__VA_ARGS__,nil]
+#endif
 #endif

@@ -141,7 +141,7 @@
     doneBtn.titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
     doneBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
     if ([btnString length]==0) {
-        [doneBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [doneBtn setTitle:UEX_LOCALIZEDSTRING(@"确定") forState:UIControlStateNormal];
     }else {
         [doneBtn setTitle:btnString forState:UIControlStateNormal];
     }

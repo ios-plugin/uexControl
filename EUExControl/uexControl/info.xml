@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexControl" version="3.0.11" build="11">
-        <info>11:插件现在支持iPad</info>
+        uexName="uexControl" version="3.0.12" build="12">
+        <info>12:添加国际化支持</info>
+        <build>11:插件现在支持iPad</build>
         <build>10:修复doRotate时的崩溃问题</build>
         <build>9:新增一个接口 允许设置取消按钮和确认按钮的标题字体颜色</build>
         <build>8:新增一个接口 只要年月</build>

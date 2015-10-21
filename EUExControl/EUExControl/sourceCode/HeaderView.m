@@ -41,12 +41,12 @@
             [self setBackgroundColor:[UIColor whiteColor]];
         }
         ////取消按钮
-		UILabel * canLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 2.5, 35, 25)];
+		UILabel * canLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 2.5, 50, 25)];
         
         //默认设置“取消”，”确认”按钮颜色为"#007aff"
         NSString *colorStr = @"#007aff";
         
-		canLabel.text = @"取消";
+		canLabel.text = UEX_LOCALIZEDSTRING(@"取消");
 		canLabel.textColor = [UIColor blackColor];
 		canLabel.font = [UIFont systemFontOfSize:12.0];
 
@@ -56,14 +56,14 @@
 		[canLabel setBackgroundColor:[UIColor clearColor]];
         self.canLabel = canLabel;
 		
-		cancle = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 41, 30)];
+		cancle = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 55, 30)];
 		//[cancle setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
 		[cancle addTarget:self action:@selector(cancleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 		[cancle addSubview:canLabel];
 		[canLabel release];
 		/////////确定按钮
-		UILabel *conLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 2.5, 35, 25)];
-		conLabel.text = @"完成";
+		UILabel *conLabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 2.5, 50, 25)];
+		conLabel.text = UEX_LOCALIZEDSTRING(@"完成");
 		conLabel.textColor = [UIColor blackColor];
 		conLabel.font = [UIFont systemFontOfSize:12.0];
         conLabel.textColor = [EUtility ColorFromString:colorStr];
@@ -71,7 +71,7 @@
 		[conLabel setBackgroundColor:[UIColor clearColor]];
         self.conLabel = conLabel;
         
-		confirm = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width-46, 5, 41, 30)];
+		confirm = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width-46, 5, 55, 30)];
 		//[confirm setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
 		[confirm addTarget:self action:@selector(confirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 		[confirm addSubview:conLabel];
