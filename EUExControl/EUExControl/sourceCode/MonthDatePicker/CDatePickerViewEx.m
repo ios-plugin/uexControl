@@ -319,7 +319,7 @@ const NSInteger numberOfComponents = 2;
     
     for(NSInteger year = self.minYear; year <= self.maxYear; year++)
     {
-        NSString *yearStr = [NSString stringWithFormat:UEX_LOCALIZEDSTRING(@"%li年"), (long)year];
+        NSString *yearStr = [NSString stringWithFormat:@"%li%@",(long)year,UEX_LOCALIZEDSTRING(@"年")];
         [years addObject:yearStr];
     }
     return years;
@@ -334,7 +334,7 @@ const NSInteger numberOfComponents = 2;
 
     month = [NSString stringWithFormat:UEX_LOCALIZEDSTRING(@"%@月"),month];
     NSString *year  = [self currentYearName];
-    year = [NSString stringWithFormat:UEX_LOCALIZEDSTRING(@"%@年"),year];
+    year = [NSString stringWithFormat:@"%@%@",year,UEX_LOCALIZEDSTRING(@"年")];
 
     //set table on the middle
     for(NSString *cellMonth in self.months)

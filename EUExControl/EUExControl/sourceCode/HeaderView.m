@@ -71,7 +71,7 @@
 		[conLabel setBackgroundColor:[UIColor clearColor]];
         self.conLabel = conLabel;
         
-		confirm = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width-46, 5, 55, 30)];
+		confirm = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width-55, 5, 55, 30)];
 		//[confirm setImage:[UIImage imageNamed:@"uexControl/top_button.png"] forState:UIControlStateNormal];
 		[confirm addTarget:self action:@selector(confirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 		[confirm addSubview:conLabel];
