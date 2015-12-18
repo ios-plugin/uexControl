@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0640"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -20,20 +20,6 @@
                ReferencedContainer = "container:EUExControl.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5A38ABCA1889391A00E3CB77"
-               BuildableName = "libuexControl.a"
-               BlueprintName = "EUExControl"
-               ReferencedContainer = "container:EUExControl.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -43,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5A38ABCA1889391A00E3CB77"
-            BuildableName = "libuexControl.a"
-            BlueprintName = "EUExControl"
-            ReferencedContainer = "container:EUExControl.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -68,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5A38ABCA1889391A00E3CB77"
-            BuildableName = "libuexControl.a"
-            BlueprintName = "EUExControl"
+            BlueprintIdentifier = "3C1AD5E31BD6139F0091D2A1"
+            BuildableName = "uexControl.bundle"
+            BlueprintName = "uexControlBundle"
             ReferencedContainer = "container:EUExControl.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -86,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5A38ABCA1889391A00E3CB77"
-            BuildableName = "libuexControl.a"
-            BlueprintName = "EUExControl"
+            BlueprintIdentifier = "3C1AD5E31BD6139F0091D2A1"
+            BuildableName = "uexControl.bundle"
+            BlueprintName = "uexControlBundle"
             ReferencedContainer = "container:EUExControl.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

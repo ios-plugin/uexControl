@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexControl" version="3.0.13" build="13">
-        <info>13:删除info.plist</info>
+        uexName="uexControl" version="3.0.14" build="14">
+        <info>14:添加IDE支持</info>
+        <build>13:删除info.plist</build>
         <build>12:添加国际化支持</build>
         <build>11:插件现在支持iPad</build>
         <build>10:修复doRotate时的崩溃问题</build>

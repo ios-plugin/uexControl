@@ -29,18 +29,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		5A38ABC91889391A00E3CB77 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		3C1AD5E41BD6139F0091D2A1 /* uexControl.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uexControl.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1C09AD1BE060A200571E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -230,7 +218,6 @@
 			buildPhases = (
 				5A38ABC71889391A00E3CB77 /* Sources */,
 				5A38ABC81889391A00E3CB77 /* Frameworks */,
-				5A38ABC91889391A00E3CB77 /* CopyFiles */,
 			);
 			buildRules = (
 			);
