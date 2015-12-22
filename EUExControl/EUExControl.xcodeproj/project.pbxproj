@@ -10,6 +10,7 @@
 		3C1C09AC1BE060A200571E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C1C09AE1BE060A200571E72 /* Localizable.strings */; };
 		3CD39C841A78848B00F5BB9D /* CDatePickerViewEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39C811A78848B00F5BB9D /* CDatePickerViewEx.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		3CD39C851A78848B00F5BB9D /* MonthPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39C831A78848B00F5BB9D /* MonthPicker.m */; };
+		4287467D1C294C9400219CDE /* Public_HIST.m in Sources */ = {isa = PBXBuildFile; fileRef = 4287467C1C294C9400219CDE /* Public_HIST.m */; };
 		5A38ABCF1889391A00E3CB77 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A38ABCE1889391A00E3CB77 /* Foundation.framework */; };
 		5A60A96318AB63F800C727A6 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A60A95218AB63F800C727A6 /* DatePicker.m */; };
 		5A60A96418AB63F800C727A6 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A60A95418AB63F800C727A6 /* HeaderView.m */; };
@@ -37,6 +38,8 @@
 		3CD39C811A78848B00F5BB9D /* CDatePickerViewEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDatePickerViewEx.m; sourceTree = "<group>"; };
 		3CD39C821A78848B00F5BB9D /* MonthPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthPicker.h; sourceTree = "<group>"; };
 		3CD39C831A78848B00F5BB9D /* MonthPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthPicker.m; sourceTree = "<group>"; };
+		4287467B1C294C9400219CDE /* Public_HIST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Public_HIST.h; sourceTree = "<group>"; };
+		4287467C1C294C9400219CDE /* Public_HIST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Public_HIST.m; sourceTree = "<group>"; };
 		5A38ABCB1889391A00E3CB77 /* libuexControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexControl.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A38ABCE1889391A00E3CB77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A38ABD21889391A00E3CB77 /* EUExControl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EUExControl-Prefix.pch"; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				5A60A95418AB63F800C727A6 /* HeaderView.m */,
 				5A60A95518AB63F800C727A6 /* InputDialog.h */,
 				5A60A95618AB63F800C727A6 /* InputDialog.m */,
+				4287467B1C294C9400219CDE /* Public_HIST.h */,
+				4287467C1C294C9400219CDE /* Public_HIST.m */,
 				5A60A95718AB63F800C727A6 /* JSON */,
 				5A60A95F18AB63F800C727A6 /* PLGrowingTextView.h */,
 				5A60A96018AB63F800C727A6 /* PLGrowingTextView.m */,
@@ -290,6 +295,7 @@
 				5A60A96918AB63FE00C727A6 /* EUExControl.m in Sources */,
 				5A60A96518AB63F800C727A6 /* InputDialog.m in Sources */,
 				3CD39C851A78848B00F5BB9D /* MonthPicker.m in Sources */,
+				4287467D1C294C9400219CDE /* Public_HIST.m in Sources */,
 				5A60A96718AB63F800C727A6 /* PLTextViewInternal.m in Sources */,
 				3CD39C841A78848B00F5BB9D /* CDatePickerViewEx.m in Sources */,
 				5A60A96618AB63F800C727A6 /* PLGrowingTextView.m in Sources */,

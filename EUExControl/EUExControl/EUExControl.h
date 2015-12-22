@@ -17,6 +17,7 @@
 #define UEX_JKHOUR   @"hour"
 #define UEX_JKMUNUTE  @"minute"
 #define UEX_JKSECOND  @"second"
+#define UEX_JKWEEK    @"week"
 
 
 @interface EUExControl : EUExBase <InputDialogDelegate,UITextViewDelegate>{
@@ -32,6 +33,9 @@
 @property (nonatomic, retain)MonthPicker *monthObj;
 @property (nonatomic, retain) InputDialog * inputObj;
 @property (nonatomic, assign) BOOL isDataPickerDidOpen;
+@property(nonatomic,strong)NSString  * diaLogColor;
+@property(nonatomic,strong)NSString  * dialogButBg;
+@property(nonatomic,strong)NSString  * dialogETBg;
 
 
 -(void)uexOpenDatePickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData;

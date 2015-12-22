@@ -27,7 +27,13 @@ typedef enum AppCanKeyBroardKeys {
     float mainWidth;
     float mainHeight;
     BOOL isLandspace;
+    UIImageView *entryImageView;
 }
+@property(nonatomic,strong)NSMutableDictionary * Viewdic;
+@property(nonatomic,strong)UIButton *doneBtn;
+@property(nonatomic,strong) UIView * view;
+@property(nonatomic,strong)UIImageView *entryImageView;
+@property(nonatomic,strong)NSString * strings;
 @property(assign)id<InputDialogDelegate> delegate;
--(void)openInputWithText:(NSString*)placeholderText btnText:(NSString*)btnString KeyBoardType:(int)keyBoardType;
+-(void)openInputWithText:(NSString*)placeholderText btnText:(NSString*)btnString KeyBoardType:(int)keyBoardType dialogBg:(NSString*)diaLogColor dialogButBg:(NSString*)dialogButBg dialogETBg:(NSString*)dialogETBg count:(NSInteger)counts;
 @end

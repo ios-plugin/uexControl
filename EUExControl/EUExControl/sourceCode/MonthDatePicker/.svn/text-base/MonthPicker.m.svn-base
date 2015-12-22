@@ -61,38 +61,24 @@
     {
         UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         if (deviceOrientation == UIInterfaceOrientationPortrait||deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-            
-            int width = [EUtility screenWidth];
-            int height  =[EUtility screenHeight];
-            
-            int realwidth = MAX(width, height);
-            int realheight = MIN(width, height);
-
-            [mainView setFrame:CGRectMake(0, realwidth-MAIN_HEIGHT, 320, MAIN_HEIGHT)];
-            [toolView setFrame:CGRectMake(0, 0,realheight, 40)];
-            [toolView.lay setFrame:CGRectMake(0, 0,realheight, 40)];
+            [mainView setFrame:CGRectMake(0, [EUtility screenWidth]-MAIN_HEIGHT, 320, MAIN_HEIGHT)];
+            [toolView setFrame:CGRectMake(0, 0,[EUtility screenWidth], 40)];
+            [toolView.lay setFrame:CGRectMake(0, 0,[EUtility screenWidth], 40)];
             [toolView.cancle setFrame:CGRectMake(5, 5, 41, 30)];
            // toolView.backgroundColor = [UIColor grayColor];
 
-            [toolView.confirm setFrame:CGRectMake(realheight-70, 5, 41, 30)];
-            [monthPcikerView setFrame:CGRectMake(0, 40, realheight, MAIN_HEIGHT-40)];
+            [toolView.confirm setFrame:CGRectMake([EUtility screenWidth]-70, 5, 41, 30)];
+            [monthPcikerView setFrame:CGRectMake(0, 40, [EUtility screenWidth], MAIN_HEIGHT-40)];
         }else if (deviceOrientation == UIInterfaceOrientationLandscapeLeft||deviceOrientation==UIInterfaceOrientationLandscapeRight){
-            
-            int width = [EUtility screenWidth];
-            int height  =[EUtility screenHeight];
-            
-            int realwidth = MAX(width, height);
-            int realheight = MIN(width, height);
-            
-            [mainView setFrame:CGRectMake(0, realheight-MAIN_HEIGHT, realwidth, MAIN_HEIGHT)];
-            [toolView setFrame:CGRectMake(0, 0,realwidth, 40)];
-            toolView.backgroundColor = [UIColor clearColor];
-            [toolView.lay setFrame:CGRectMake(0, 0, realwidth, 40)];
-            [toolView.confirm setFrame:CGRectMake(realwidth - 36, 5, 41, 30)];
+            [mainView setFrame:CGRectMake(0, ([UIScreen mainScreen].bounds.size.height)-MAIN_HEIGHT, [UIScreen mainScreen].bounds.size.width, MAIN_HEIGHT)];
+            [toolView setFrame:CGRectMake(0, 0, [EUtility screenHeight], 40)];
+            toolView.backgroundColor = [UIColor grayColor];
+            [toolView.lay setFrame:CGRectMake(0, 0, [EUtility screenHeight], 40)];
+            [toolView.confirm setFrame:CGRectMake([EUtility screenWidth] - 36, 5, 41, 30)];
            //toolView.confirm.backgroundColor = [UIColor redColor];
             [toolView.cancle setFrame:CGRectMake(5, 5, 41, 30)];
 //            toolView.cancle.backgroundColor = [UIColor grayColor];
-            [monthPcikerView setFrame:CGRectMake(0, 40, realwidth-MAIN_HEIGHT, MAIN_HEIGHT-40)];
+            [monthPcikerView setFrame:CGRectMake(0, 40, [EUtility screenHeight]-MAIN_HEIGHT, MAIN_HEIGHT-40)];
         }
 //手机版；
     }else{
@@ -132,44 +118,18 @@
     
     UIInterfaceOrientation deviceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if ( deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        
-        int width = [EUtility screenWidth];
-        int height  =[EUtility screenHeight];
-        
-        int realwidth = MAX(width, height);
-        int realheight = MIN(width, height);
-        if (isPad)
-        {
-              self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0,realwidth, realheight, MAIN_HEIGHT)] autorelease];
-        }else{
-        
-              self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight]-MAIN_HEIGHT, realheight, MAIN_HEIGHT)] autorelease];
-        }
-        self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0,realwidth-MAIN_HEIGHT, realheight, MAIN_HEIGHT)] autorelease];
-        self.toolView = [[[HeaderView alloc] initWithFrame:CGRectMake(0, 0, realheight, 40)] autorelease];
-        self.toolView.confirm.frame = CGRectMake(realheight-65, 5, 41, 30);
+        self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0, [EUtility screenHeight], [UIScreen mainScreen].bounds.size.width, MAIN_HEIGHT)] autorelease];
+        self.toolView = [[[HeaderView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)] autorelease];
+        self.toolView.confirm.frame = CGRectMake(self.mainView.frame.size.width-65, 5, 41, 30);
         self.monthPcikerView = [[[CDatePickerViewEx alloc] init] autorelease];
-        [monthPcikerView setFrame:CGRectMake(0, 40,realheight, MAIN_HEIGHT-40)];
+        [monthPcikerView setFrame:CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width, MAIN_HEIGHT-40)];
     }else {
-        
-        int width = [EUtility screenWidth];
-        int height  =[EUtility screenHeight];
-        
-        int realwidth = MAX(width, height);
-        int realheight = MIN(width, height);
-        if (isPad)
-        {
-             self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, realheight, MAIN_HEIGHT)] autorelease];
-        }else{
-        
-             self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, realheight, MAIN_HEIGHT)] autorelease];
-        }
+        self.mainView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, MAIN_HEIGHT)] autorelease];
        
-        self.mainView.backgroundColor = [UIColor yellowColor];
-        self.toolView = [[[HeaderView alloc] initWithFrame:CGRectMake(0, 0,realheight, 40)] autorelease];
-         self.toolView.confirm.frame = CGRectMake(realheight-55, 5, 41, 30);
+        self.toolView = [[[HeaderView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, 40)] autorelease];
+         self.toolView.confirm.frame = CGRectMake(self.mainView.frame.size.width-55, 5, 41, 30);
         self.monthPcikerView = [[[CDatePickerViewEx alloc] init] autorelease];
-        [monthPcikerView setFrame:CGRectMake(0, 40,realheight, MAIN_HEIGHT-40)];
+        [monthPcikerView setFrame:CGRectMake(0, 40,[UIScreen mainScreen].bounds.size.width, MAIN_HEIGHT-40)];
     }
     toolView.delegate = self;
     
@@ -192,12 +152,7 @@
         if (euexObj.meBrwView) {
             if (![EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
                 [UIView animateWithDuration:0.3 animations:^{
-                    int width = [EUtility screenWidth];
-                    int height  =[EUtility screenHeight];
-                    
-                    int realwidth = MAX(width, height);
-                    int realheight = MIN(width, height);
-                    [mainView setFrame:CGRectMake(0, realheight-MAIN_HEIGHT, realheight, MAIN_HEIGHT)];
+                    [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, [UIScreen mainScreen].bounds.size.width, MAIN_HEIGHT)];
                 }];
             }
             [(UIView*)euexObj.meBrwView setUserInteractionEnabled:NO];
@@ -209,12 +164,8 @@
         [controller release];
         self.popController = popover;
         [popover release];
-        int width = [EUtility screenWidth];
-        int height  =[EUtility screenHeight];
         
-        int realwidth = MAX(width, height);
-        int realheight = MIN(width, height);
-        [popController setPopoverContentSize:CGSizeMake(realheight, MAIN_HEIGHT)];
+        [popController setPopoverContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, MAIN_HEIGHT)];
         [popController setDelegate:self];
         //让pop窗口的位置在中间
         int x = SCREEN_WIDTH/2;
@@ -223,7 +174,6 @@
     }
     if (isPad)
     {
-        
         
     }else{
          [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
