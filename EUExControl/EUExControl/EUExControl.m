@@ -14,6 +14,9 @@
 @synthesize dateObj;
 @synthesize monthObj;
 @synthesize inputObj;
+@synthesize diaLogColor;
+@synthesize dialogButBg;
+@synthesize dialogETBg;
 
 -(id)initWithBrwView:(EBrowserView *) eInBrwView {
 	if (self = [super initWithBrwView:eInBrwView]) {
@@ -22,79 +25,28 @@
 	return self;
 }
 
-- (UIColor *)stringToColor:(NSString *)aString{
-    if ([aString isKindOfClass:[NSString class]] && aString.length > 0) {
-        UIColor *color = [EUtility ColorFromString:aString];
-        return color;
-    }else{
-        return nil;
-    }
-}
-
--(void)setDatePickerConfirmBtnColor:(NSMutableArray *)inArguments{
-    
-    if ([inArguments count] <= 0) {
-        
-        return;
-    }
-
-    NSString * jsonStr = [inArguments objectAtIndex:0];
-    NSMutableDictionary * jsDic = [jsonStr JSONValue];
-    
-    NSString * titleColor = [jsDic objectForKey:@"leftBtnTitleColor"];
-    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
-        self.dateObj.toolView.canLabel.textColor = [self stringToColor:titleColor];
-    }
-    
-    titleColor = [jsDic objectForKey:@"rightBtnTitleColor"];
-    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
-        self.dateObj.toolView.conLabel.textColor = [self stringToColor:titleColor];
-    }
-}
-
--(void)setDatePickerWithoutDayConfirmBtnColor:(NSMutableArray *)inArguments{
-    
-    if ([inArguments count] <= 0) {
-        
-        return;
-    }
-    
-    NSString * jsonStr = [inArguments objectAtIndex:0];
-    NSMutableDictionary * jsDic = [jsonStr JSONValue];
-    
-    
-    NSString * titleColor = [jsDic objectForKey:@"leftBtnTitleColor"];
-    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
-        self.monthObj.toolView.canLabel.textColor = [self stringToColor:titleColor];
-    }
-    
-    titleColor = [jsDic objectForKey:@"rightBtnTitleColor"];
-    if ([titleColor isKindOfClass:[NSString class]] && [titleColor length]>0) {
-        self.monthObj.toolView.conLabel.textColor = [self stringToColor:titleColor];
-    }
-}
-
-
 -(void)clean{
 	if (dateObj) {
-        [[NSNotificationCenter defaultCenter] removeObserver:dateObj];
-        [dateObj release];
-        dateObj = nil;
+        self.dateObj = nil;
 	}
     if(monthObj){
-        [[NSNotificationCenter defaultCenter] removeObserver:monthObj];
-        [monthObj release];
-        monthObj = nil;
+        self.monthObj = nil;
     }
-    if (inputObj) {
-        [[NSNotificationCenter defaultCenter] removeObserver:inputObj];
-        [inputObj release];
-        inputObj = nil;
+	if (inputObj) {
+        self.inputObj = nil;
 	}
 }
 
 -(void)dealloc{
-    [self clean];
+	if (dateObj) {
+        self.dateObj = nil;
+	}
+    if(monthObj){
+        self.monthObj = nil;
+    }
+	if (inputObj) {
+        self.inputObj = nil;
+	}
 	[super dealloc];
 }
 
@@ -106,6 +58,19 @@
     NSString * inHint = [inArguments objectAtIndex:1];
     
     NSString * btnTitle = [inArguments objectAtIndex:2];
+    
+    NSInteger a = inArguments.count;
+    if (inArguments.count==4)
+    {
+        NSString * bgParmString = [inArguments objectAtIndex:3];
+        NSDictionary * dict = [bgParmString JSONValue];
+        NSLog(@"%@",dict);
+        diaLogColor = [dict objectForKey:@"dialogBg"];
+        dialogButBg = [dict objectForKey:@"dialogButBg"];
+        dialogETBg = [dict objectForKey:@"dialogETBg"];
+    }
+    
+    
 	[inputObj release];
 	inputObj = nil;
     
@@ -113,15 +78,26 @@
     float heightOfInputObj = 40;
     UIInterfaceOrientation cOrientation = [UIApplication sharedApplication].statusBarOrientation;
 	if ((cOrientation == UIInterfaceOrientationLandscapeLeft) || (cOrientation == UIInterfaceOrientationLandscapeRight)) {
-        frameOfInputObj = CGRectMake(0, [EUtility screenWidth] - heightOfInputObj, [EUtility screenHeight], heightOfInputObj);
+        int width = [EUtility screenWidth];
+        int height  =[EUtility screenHeight];
+        
+        int realwidth = MAX(width, height);
+        int realheight = MIN(width, height);
+        frameOfInputObj = CGRectMake(0, 0, realwidth, heightOfInputObj);
     } else {
         frameOfInputObj = CGRectMake(0, [EUtility screenHeight] - heightOfInputObj, [EUtility screenWidth], heightOfInputObj);
     }
     inputObj = [[InputDialog alloc] initWithFrame:frameOfInputObj];
-    [inputObj openInputWithText:inHint btnText:btnTitle KeyBoardType:inType];
+    inputObj.backgroundColor = [UIColor clearColor];
+//    [inputObj openInputWithText:inHint btnText:btnTitle KeyBoardType:inType];
+    NSString *path = [EUtility getAbsPath:self.meBrwView path:dialogETBg];
+    NSString * btgPath = [EUtility getAbsPath:self.meBrwView path:dialogButBg];
+    
+    [inputObj openInputWithText:inHint btnText:(btnTitle) KeyBoardType:inType dialogBg:diaLogColor dialogButBg:btgPath dialogETBg:path count:a];
     [inputObj setDelegate:self];
+    NSLog(@"------->>>%@",NSStringFromCGRect(inputObj.frame));
     [EUtility brwView:meBrwView addSubview:inputObj];
-    [EUtility brwView:meBrwView forbidRotate:YES];
+    //[EUtility brwView:meBrwView forbidRotate:YES];
     inputHasDisplay = YES;
 }
 
@@ -167,6 +143,8 @@
 		inDate = [NSDate date];
 	}
 	[dateObj showDatePickerWithType:0 date:inDate];
+    
+
 }
 
 
@@ -186,10 +164,13 @@
     if ([inYear isEqualToString:@""]||[inMonth isEqualToString:@""]) {
         inDate = [NSDate date];
     }else {
+        //		NSLog(@"[control opendatePicker");
         NSString *dateStr = [NSString stringWithFormat:@"%@-%@",inYear,inMonth];
+        //		 NSLog(@"datestr = %@",dateStr);
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"yyyy-MM"];
         inDate = [df dateFromString:dateStr];
+        //		 NSLog(@"inldate = %@",inDate);
         [df release];
     }
     if (inDate == nil) {
@@ -245,6 +226,7 @@
 -(void)uexOpenMonthPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData{
     inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [self jsSuccessWithName:@"uexControl.cbOpenDatePickerWithoutDay" opId:inOpId dataType:inDataType strData:inData];
+    NSLog(@"%@",inData);
 }
 -(void)uexOpenTimerPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData{
 	inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
