@@ -27,7 +27,9 @@
 @property (nonatomic, retain) UIDatePicker *pickerView;
 @property (nonatomic, retain) NSMutableDictionary *selectValue;
 @property (nonatomic, retain) UIPopoverController *popController;
+@property float tagID;
 
 -(id)initWithEuex:(EUExControl *)euexObj_;
 -(void)showDatePickerWithType:(int)type date:(NSDate *)inDate;
+-(void)showDatePickerWithType:(int)type date:(NSDate *)inDate minDate:(NSDate *)minDate maxDate:(NSDate *)maxDate tag:(float)tag;
 @end
