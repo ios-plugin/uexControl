@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexControl" version="3.0.14" build="14">
-        <info>14:添加IDE支持</info>
+        uexName="uexControl" version="3.0.15" build="15">
+        <info>15:修改无法打开带配置的日期选择器的BUG</info>
+        <build>14:添加IDE支持</build>
         <build>13:删除info.plist</build>
         <build>12:添加国际化支持</build>
         <build>11:插件现在支持iPad</build>
