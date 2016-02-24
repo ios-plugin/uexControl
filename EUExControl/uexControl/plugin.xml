@@ -3,6 +3,7 @@
     <plugin name="uexControl">
         <method name="openDatePicker"></method>
         <method name="openDatePickerWithoutDay"></method>
+        <method name="openDatePickerWithConfig"></method>
 		<method name="openTimePicker"></method>
         <method name="openInputDialog"></method>
         <method name="setDatePickerConfirmBtnColor"></method>
