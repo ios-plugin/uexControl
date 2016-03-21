@@ -150,14 +150,15 @@
     if (![inArguments isKindOfClass:[NSMutableArray class]] || [inArguments count] < 3) {
         return;
     }
-   	NSString *inYear = [inArguments objectAtIndex:0];
-	NSString *inMonth = [inArguments objectAtIndex:1];
-	NSString *inDay = [inArguments objectAtIndex:2];
+   
+    NSInteger inYear = [[inArguments objectAtIndex:0] integerValue];
+    NSInteger inMonth = [[inArguments objectAtIndex:1] integerValue];
+    NSInteger inDay = [[inArguments objectAtIndex:2] integerValue];
     NSDate *inDate;
-	if ([inYear isEqualToString:@""]||[inMonth isEqualToString:@""]||[inDay isEqualToString:@""]) {
+	if (inYear == 0 ||inMonth == 0 ||inDay == 0) {
 		inDate = [NSDate date];
 	}else {
-		NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@",inYear,inMonth,inDay];
+		NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@",@(inYear),@(inMonth),@(inDay)];
 		NSDateFormatter *df = [[NSDateFormatter alloc] init];
 		[df setDateFormat:@"yyyy-MM-dd"];
 		inDate = [df dateFromString:dateStr];
@@ -315,17 +316,17 @@
     [tempObj release];
     
     inputHasDisplay = NO;
-    NSString *inYear = [inArguments objectAtIndex:0];
-    NSString *inMonth = [inArguments objectAtIndex:1];
-    if ([inYear intValue]>9999||[inMonth intValue]>12) {
+    NSInteger inYear = [[inArguments objectAtIndex:0] integerValue];
+    NSInteger inMonth = [[inArguments objectAtIndex:1] integerValue];
+    if (inYear > 9999||inMonth > 12) {
         [self jsFailedWithOpId:0 errorCode:1050101 errorDes:UEX_ERROR_DESCRIBE_ARGS];
         return;
     }
     NSDate *inDate;
-    if ([inYear isEqualToString:@""]||[inMonth isEqualToString:@""]) {
+    if (inYear == 0||inMonth == 0) {
         inDate = [NSDate date];
     }else {
-        NSString *dateStr = [NSString stringWithFormat:@"%@-%@",inYear,inMonth];
+        NSString *dateStr = [NSString stringWithFormat:@"%@-%@",@(inYear),@(inMonth)];
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"yyyy-MM"];
         inDate = [df dateFromString:dateStr];
@@ -356,24 +357,24 @@
     {
         return;
     }
-    else {
-        inHours = [inArguments objectAtIndex:0];
-        inMin = [inArguments objectAtIndex:1];
-        int h = [inHours intValue];
-        int m = [inMin intValue];
-        if ((inHours.length==0)||(inMin.length==0)||(h > 24)||(h < 0)||(m > 60)||(m < 0)) {
-            NSDate *today = [NSDate date];
-            [dateObj showDatePickerWithType:1 date:today];
-        }
-        else{
-            NSString *dateStr = [NSString stringWithFormat:@"%@:%@",inHours,inMin];
-            NSDateFormatter *df = [[NSDateFormatter alloc] init];
-            [df setDateFormat:@"HH:mm"];
-            NSDate *inDate = [df dateFromString:dateStr];
-            [df release];
-            [dateObj showDatePickerWithType:1 date:inDate];
-        }
+    
+    inHours = [inArguments[0] isKindOfClass:[NSString class]] ? inArguments[0] : @" ";
+    inMin = [inArguments[1] isKindOfClass:[NSString class]] ? inArguments[1] : @" ";
+    int h = [inHours intValue];
+    int m = [inMin intValue];
+    if ((inHours.length==0)||(inMin.length==0)||(h > 24)||(h < 0)||(m > 60)||(m < 0)) {
+        NSDate *today = [NSDate date];
+        [dateObj showDatePickerWithType:1 date:today];
     }
+    else{
+        NSString *dateStr = [NSString stringWithFormat:@"%@:%@",inHours,inMin];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"HH:mm"];
+        NSDate *inDate = [df dateFromString:dateStr];
+        [df release];
+        [dateObj showDatePickerWithType:1 date:inDate];
+    }
+    
     
 }
 
