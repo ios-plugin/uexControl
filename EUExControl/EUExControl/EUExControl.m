@@ -174,39 +174,52 @@
     if (_isDataPickerDidOpen) {
         return;
     }
-    DatePicker *tempObj = [[DatePicker alloc] initWithEuex:self];
-    self.dateObj = tempObj;
-    [tempObj release];
-    inputHasDisplay = NO;
-    _isDataPickerDidOpen = YES;
-//    if (![inArguments isKindOfClass:[NSMutableArray class]] || [inArguments count] < 3) {
-//        return;
-//    }
     NSString *jsonStr = nil;
     NSMutableDictionary *jsonDict = [NSMutableDictionary dictionary];
     if (inArguments.count > 0) {
-        
         jsonStr = [inArguments objectAtIndex:0];
         jsonDict = [jsonStr JSONValue];//将JSON类型的字符串转化为可变字典
         
     }else{
         return;
     }
+    if (!self.dateObj) {
+        DatePicker *tempObj = [[DatePicker alloc] initWithEuex:self];
+        self.dateObj = tempObj;
+        [tempObj release];
+    }
+    
+
+
+//    if (![inArguments isKindOfClass:[NSMutableArray class]] || [inArguments count] < 3) {
+//        return;
+//    }
+
+    
+    NSString *(^getString)(id) = ^NSString * (id obj){
+        if ([obj isKindOfClass:[NSString class]]) {
+            return obj;
+        }
+        if ([obj isKindOfClass:[NSNumber class]]) {
+            return [obj stringValue];
+        }
+        return @"";
+    };
     float datePickerId = [[jsonDict objectForKey:@"datePickerId"] floatValue];
     NSDictionary *initDateDic = [jsonDict objectForKey:@"initDate"];
     NSDictionary *maxDateDic = [jsonDict objectForKey:@"maxDate"];
     NSDictionary *minDateDic = [jsonDict objectForKey:@"minDate"];
     
-   	NSString *inYear = [[initDateDic objectForKey:@"year"] stringValue];
-    NSString *inMonth = [[initDateDic objectForKey:@"month"]stringValue];
-    NSString *inDay = [[initDateDic objectForKey:@"day"] stringValue];
+   	NSString *inYear = getString([initDateDic objectForKey:@"year"]);
+    NSString *inMonth = getString([initDateDic objectForKey:@"month"]);
+    NSString *inDay = getString([initDateDic objectForKey:@"day"]);
     //NSDictionary *dateData = [NSDictionary dictionary];
     NSDate *minDate = nil;
     if (minDateDic != nil) {
         float minLimitType = [[minDateDic objectForKey:@"limitType"] floatValue];
-        NSString *minYear = [[minDateDic objectForKey:@"data"][@"year"] stringValue];
-        NSString *minMonth = [[minDateDic objectForKey:@"data"][@"month"]stringValue];
-        NSString *minDay = [[minDateDic objectForKey:@"data"][@"day"] stringValue];
+        NSString *minYear = getString([minDateDic objectForKey:@"data"][@"year"]);
+        NSString *minMonth = getString([minDateDic objectForKey:@"data"][@"month"]);
+        NSString *minDay = getString([minDateDic objectForKey:@"data"][@"day"]);
         if (minLimitType == 0) {
             if (minYear == nil||minMonth == nil||minDay == nil) {
                 
@@ -264,9 +277,9 @@
       NSDate *maxDate = nil;
     if (maxDateDic != nil) {
         float maxLimitType = [[maxDateDic objectForKey:@"limitType"] floatValue];
-        NSString *maxYear = [[maxDateDic objectForKey:@"data"][@"year"] stringValue];
-        NSString *maxMonth = [[maxDateDic objectForKey:@"data"][@"month"]stringValue];
-        NSString *maxDay = [[maxDateDic objectForKey:@"data"][@"day"] stringValue];
+        NSString *maxYear = getString([maxDateDic objectForKey:@"data"][@"year"]);
+        NSString *maxMonth = getString([maxDateDic objectForKey:@"data"][@"month"]);
+        NSString *maxDay = getString([maxDateDic objectForKey:@"data"][@"day"]);
         if (maxLimitType == 0) {
             if (maxYear == nil||maxMonth == nil||maxDay == nil) {
                 
@@ -307,6 +320,8 @@
 
     }
     [dateObj showDatePickerWithType:2 date:inDate minDate:minDate maxDate:maxDate tag:datePickerId];
+    inputHasDisplay = NO;
+    _isDataPickerDidOpen = YES;
   
 }
 //----------------------------------------------------------
@@ -342,32 +357,39 @@
 
 -(void)openTimePicker:(NSMutableArray *)inArguments{
     
-    if (_isDataPickerDidOpen) {
+    if (_isDataPickerDidOpen){
         return;
     }
-    
+    if ([inArguments count]<2){
+        return;
+    }
     DatePicker * tempObj = [[DatePicker alloc] initWithEuex:self];
     self.dateObj = tempObj;
     [tempObj release];
     inputHasDisplay = NO;
     _isDataPickerDidOpen = YES;
-    NSString * inHours=nil;
-    NSString * inMin=nil;
-    if ([inArguments count]<2)
-    {
-        return;
-    }
     
-    inHours = [inArguments[0] isKindOfClass:[NSString class]] ? inArguments[0] : @" ";
-    inMin = [inArguments[1] isKindOfClass:[NSString class]] ? inArguments[1] : @" ";
+    NSNumber * (^getNumber)(id) = ^NSNumber *(id obj){
+        if ([obj isKindOfClass:[NSNumber class]]) {
+            return obj;
+        }
+        if ([obj isKindOfClass:[NSString class]] && [obj length] > 0) {
+            return [NSDecimalNumber decimalNumberWithString:obj];
+        }
+        return nil;
+    };
+    
+    NSNumber *inHours = getNumber(inArguments[0]);
+    NSNumber *inMin = getNumber(inArguments[1]);
+    
     int h = [inHours intValue];
     int m = [inMin intValue];
-    if ((inHours.length==0)||(inMin.length==0)||(h > 24)||(h < 0)||(m > 60)||(m < 0)) {
+    if (!inHours || !inMin || (h > 24)||(h < 0)||(m > 60)||(m < 0)) {
         NSDate *today = [NSDate date];
         [dateObj showDatePickerWithType:1 date:today];
     }
     else{
-        NSString *dateStr = [NSString stringWithFormat:@"%@:%@",inHours,inMin];
+        NSString *dateStr = [NSString stringWithFormat:@"%@:%@",@(h),@(m)];
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"HH:mm"];
         NSDate *inDate = [df dateFromString:dateStr];

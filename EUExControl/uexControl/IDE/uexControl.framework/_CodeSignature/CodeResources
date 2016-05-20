@@ -6,26 +6,26 @@
 	<dict>
 		<key>Info.plist</key>
 		<data>
-		m6e4SIDD0GwL8KGgi1SkXU2msEg=
+		4d3KLQy3CCKOxKUBVOYz6/rgA28=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
 		JKbXoT98W7zj86Z2W3qbeHZe/kE=
 		</data>
-		<key>uexControl.bundle/Contents/Resources/en.lproj/Localizable.strings</key>
+		<key>uexControl.bundle/en.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			h2NpojMnu9sPKtVdujPeN1AfyqM=
+			KaycJrYzgxmK4fI1AP4lTZnupkw=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>uexControl.bundle/Contents/Resources/zh-Hans.lproj/Localizable.strings</key>
+		<key>uexControl.bundle/zh-Hans.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NfP0H11k+pBVjOQlxeoDfFvxy/A=
+			Hz6n6pbS48cq4HXzFkzWJPurRqw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -34,23 +34,38 @@
 	<key>files2</key>
 	<dict>
 		<key>embedded.mobileprovision</key>
-		<data>
-		JKbXoT98W7zj86Z2W3qbeHZe/kE=
-		</data>
-		<key>uexControl.bundle/Contents/Resources/en.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			h2NpojMnu9sPKtVdujPeN1AfyqM=
+			JKbXoT98W7zj86Z2W3qbeHZe/kE=
+			</data>
+			<key>hash2</key>
+			<data>
+			0p8akoZIUNhnEHSrm+cwtP59I1VEbMUe0Gn2IpgCK98=
+			</data>
+		</dict>
+		<key>uexControl.bundle/en.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KaycJrYzgxmK4fI1AP4lTZnupkw=
+			</data>
+			<key>hash2</key>
+			<data>
+			ND7JIkWO5H9r0XW8z4qkQ5UNI1CBfJoCEUs/WN6CweE=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>uexControl.bundle/Contents/Resources/zh-Hans.lproj/Localizable.strings</key>
+		<key>uexControl.bundle/zh-Hans.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NfP0H11k+pBVjOQlxeoDfFvxy/A=
+			Hz6n6pbS48cq4HXzFkzWJPurRqw=
+			</data>
+			<key>hash2</key>
+			<data>
+			ylxZeFWlLWZT4bUIGrvyjbNtEtamVwPokHrs8SUnETU=
 			</data>
 			<key>optional</key>
 			<true/>
