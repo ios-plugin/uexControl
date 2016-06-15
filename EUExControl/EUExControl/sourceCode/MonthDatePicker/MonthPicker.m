@@ -135,14 +135,14 @@
     [mainView setBackgroundColor:[UIColor whiteColor]];
     [mainView addSubview:monthPcikerView];
     if (![EUtility isIpad] || SCREEN_WIDTH == 320) {
-        [EUtility brwView:euexObj.meBrwView addSubview:mainView];
-        if (euexObj.meBrwView) {
+        [euexObj.webViewEngine.webView addSubview:mainView];
+        if (euexObj.webViewEngine.webView) {
             if (![EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
                 [UIView animateWithDuration:0.3 animations:^{
                     [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, SCREEN_WIDTH, MAIN_HEIGHT)];
                 }];
             }
-            [(UIView*)euexObj.meBrwView setUserInteractionEnabled:NO];
+            [(UIView*)euexObj.webViewEngine.webView setUserInteractionEnabled:YES];
         }
     }else {
         UIViewController *controller = [[UIViewController alloc] init];
@@ -157,7 +157,8 @@
         //让pop窗口的位置在中间
         int x = SCREEN_WIDTH/2;
         int y = (SCREEN_HEIGHT-20)/2;
-        [EUtility brwView:euexObj.meBrwView presentPopover:popController FromRect:CGRectMake(x, y, 10, 10) permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        //[EUtility brwView:euexObj.meBrwView presentPopover:popController FromRect:CGRectMake(x, y, 10, 10) permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popController presentPopoverFromRect:CGRectMake(x, y, 10, 10) inView:euexObj.webViewEngine.webView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
     
@@ -167,13 +168,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     if (mainView) {
         [mainView removeFromSuperview];
+        mainView = nil;
     }
     return YES;
 }
 
 - (void)cancled:(id)headerView{
-    if (euexObj.meBrwView) {
-        [(UIView*)euexObj.meBrwView setUserInteractionEnabled:YES];
+    if (euexObj.webViewEngine.webView) {
+        [(UIView*)euexObj.webViewEngine.webView setUserInteractionEnabled:YES];
     }
     
     if (![EUtility isIpad] || SCREEN_WIDTH == 320) {
@@ -182,6 +184,7 @@
         } completion:^(BOOL finish){
             if (finish) {
                 [mainView removeFromSuperview];
+                mainView = nil;
             }
         }];
     }
@@ -193,8 +196,8 @@
 }
 
 - (void)confirm:(id)headerView{
-    if (euexObj.meBrwView) {
-        [(UIView*)euexObj.meBrwView setUserInteractionEnabled:YES];
+    if (euexObj.webViewEngine.webView) {
+        [(UIView*)euexObj.webViewEngine.webView setUserInteractionEnabled:YES];
     }
     
     NSDate *checkDate = monthPcikerView.resultDate;
@@ -215,6 +218,7 @@
         } completion:^(BOOL finish){
             if (finish) {
                 [mainView removeFromSuperview];
+                mainView = nil;
             }
         }];
     }
