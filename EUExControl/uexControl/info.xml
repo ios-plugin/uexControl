@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexControl" version="4.0.0" build="18">
-        <info>18:支持引擎4.0，函数入参</info>
-        <build>17:修复一处可能导致闪退的bug</build>
+        uexName="uexControl" version="3.0.17" build="17">
+        <info>17:修复一处可能导致闪退的bug</info>
         <build>16:对3.3引擎下非string参数造成闪退的情况进行了处理</build>
         <build>15:修改无法打开带配置的日期选择器的BUG</build>
         <build>14:添加IDE支持</build>
