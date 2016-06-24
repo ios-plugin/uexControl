@@ -283,9 +283,16 @@
     }
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 	if ([pickerType intValue] == 0) {
+        [selectValue removeObjectForKey:UEX_JKHOUR];
+        [selectValue removeObjectForKey:UEX_JKMUNUTE];
+        [selectValue removeObjectForKey:UEX_JKSECOND];
 		[euexObj uexOpenDatePickerWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_JSON data:[selectValue JSONFragment]];
         
 	}else if([pickerType intValue] == 1){
+        [selectValue removeObjectForKey:UEX_JKYEAR];
+         [selectValue removeObjectForKey:UEX_JKMONTH];
+        [selectValue removeObjectForKey:UEX_JKDAY];
+        [selectValue removeObjectForKey:UEX_JKSECOND];
 		[euexObj uexOpenTimerPickerWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_JSON data:[selectValue JSONFragment]];
     }else{
         [euexObj uexOpenDatePickerWithConfigAndOpId:0  tagID:self.tagID dataType:UEX_CALLBACK_DATATYPE_JSON data:[selectValue JSONFragment]];
