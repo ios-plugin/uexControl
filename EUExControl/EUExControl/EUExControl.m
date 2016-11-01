@@ -158,7 +158,7 @@
     [tempObj release];
     inputHasDisplay = NO;
     _isDataPickerDidOpen = YES;
-    if (![inArguments isKindOfClass:[NSMutableArray class]] || [inArguments count] < 4) {
+    if (![inArguments isKindOfClass:[NSMutableArray class]] || [inArguments count] < 3) {
         return;
     }
    
@@ -377,7 +377,7 @@
     if (_isDataPickerDidOpen){
         return;
     }
-    if ([inArguments count]<3){
+    if ([inArguments count]<2){
         return;
     }
     ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
