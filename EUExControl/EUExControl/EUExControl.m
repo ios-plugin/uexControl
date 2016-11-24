@@ -15,13 +15,18 @@
 @synthesize monthObj;
 @synthesize inputObj;
 
--(id)initWithBrwView:(EBrowserView *) eInBrwView {
-	if (self = [super initWithBrwView:eInBrwView]) {
+//-(id)initWithBrwView:(EBrowserView *) eInBrwView {
+//	if (self = [super initWithBrwView:eInBrwView]) {
+//        _isDataPickerDidOpen = NO;
+//	}
+//	return self;
+//}
+-(id)initWithWebViewEngine:(id<AppCanWebViewEngineObject>)engine{
+    if (self = [super initWithWebViewEngine:engine]) {
         _isDataPickerDidOpen = NO;
-	}
-	return self;
+    }
+    return self;
 }
-
 - (UIColor *)stringToColor:(NSString *)aString{
     if ([aString isKindOfClass:[NSString class]] && aString.length > 0) {
         UIColor *color = [EUtility ColorFromString:aString];
@@ -106,6 +111,8 @@
     NSString * inHint = [inArguments objectAtIndex:1];
     
     NSString * btnTitle = [inArguments objectAtIndex:2];
+    ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
+    self.func = func;
 	[inputObj release];
 	inputObj = nil;
     
@@ -120,16 +127,20 @@
     inputObj = [[InputDialog alloc] initWithFrame:frameOfInputObj];
     [inputObj openInputWithText:inHint btnText:btnTitle KeyBoardType:inType];
     [inputObj setDelegate:self];
-    [EUtility brwView:meBrwView addSubview:inputObj];
-    [EUtility brwView:meBrwView forbidRotate:YES];
+    //[EUtility brwView:meBrwView addSubview:inputObj];
+    [[self.webViewEngine webView] addSubview:inputObj];
+    //[EUtility brwView:meBrwView forbidRotate:YES];
     inputHasDisplay = YES;
 }
 
 -(void)inputFinish:(NSString *)inputResult{
-     [EUtility brwView:meBrwView forbidRotate:NO];
+     //[EUtility brwView:meBrwView forbidRotate:NO];
     inputHasDisplay = NO;
    // [self jsSuccessWithName:@"uexControl.cbInputCompleted" opId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:inputResult];
-    [self jsSuccessWithName:@"uexControl.cbOpenInputDialog" opId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:inputResult];
+    //[self jsSuccessWithName:@"uexControl.cbOpenInputDialog" opId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:inputResult];
+    [self.webViewEngine callbackWithFunctionKeyPath:@"uexControl.cbOpenInputDialog" arguments:ACArgsPack(@0,@0,inputResult)];
+    [self.func executeWithArguments:ACArgsPack(inputResult)];
+    self.func = nil;
 }
 
 -(void)inputDialogClose{
@@ -154,6 +165,8 @@
     NSInteger inYear = [[inArguments objectAtIndex:0] integerValue];
     NSInteger inMonth = [[inArguments objectAtIndex:1] integerValue];
     NSInteger inDay = [[inArguments objectAtIndex:2] integerValue];
+    ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
+    self.func = func;
     NSDate *inDate;
 	if (inYear == 0 ||inMonth == 0 ||inDay == 0) {
 		inDate = [NSDate date];
@@ -189,6 +202,8 @@
         [tempObj release];
     }
     
+    ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
+    self.func = func;
 
 
 //    if (![inArguments isKindOfClass:[NSMutableArray class]] || [inArguments count] < 3) {
@@ -333,6 +348,8 @@
     inputHasDisplay = NO;
     NSInteger inYear = [[inArguments objectAtIndex:0] integerValue];
     NSInteger inMonth = [[inArguments objectAtIndex:1] integerValue];
+     ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
+    self.func = func;
     if (inYear > 9999||inMonth > 12) {
         [self jsFailedWithOpId:0 errorCode:1050101 errorDes:UEX_ERROR_DESCRIBE_ARGS];
         return;
@@ -363,6 +380,8 @@
     if ([inArguments count]<2){
         return;
     }
+    ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
+    self.func = func;
     DatePicker * tempObj = [[DatePicker alloc] initWithEuex:self];
     self.dateObj = tempObj;
     [tempObj release];
@@ -402,15 +421,24 @@
 
 -(void)uexOpenDatePickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData{
 	inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	[self jsSuccessWithName:@"uexControl.cbOpenDatePicker" opId:inOpId dataType:inDataType strData:inData];
+	//[self jsSuccessWithName:@"uexControl.cbOpenDatePicker" opId:inOpId dataType:inDataType strData:inData];
+    [self.webViewEngine callbackWithFunctionKeyPath:@"uexControl.cbOpenDatePicker" arguments:ACArgsPack(@(inOpId),@(inDataType),inData)];
+    [self.func executeWithArguments:ACArgsPack([inData JSONValue])];
+    self.func = nil;
 }
 -(void)uexOpenMonthPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData{
     inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self jsSuccessWithName:@"uexControl.cbOpenDatePickerWithoutDay" opId:inOpId dataType:inDataType strData:inData];
+    //[self jsSuccessWithName:@"uexControl.cbOpenDatePickerWithoutDay" opId:inOpId dataType:inDataType strData:inData];
+    [self.webViewEngine callbackWithFunctionKeyPath:@"uexControl.cbOpenDatePickerWithoutDay" arguments:ACArgsPack(@(inOpId),@(inDataType),inData)];
+    [self.func executeWithArguments:ACArgsPack([inData JSONValue])];
+    self.func = nil;
 }
 -(void)uexOpenTimerPickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData{
 	inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	[self jsSuccessWithName:@"uexControl.cbOpenTimePicker" opId:inOpId dataType:inDataType strData:inData];
+	//[self jsSuccessWithName:@"uexControl.cbOpenTimePicker" opId:inOpId dataType:inDataType strData:inData];
+    [self.webViewEngine callbackWithFunctionKeyPath:@"uexControl.cbOpenTimePicker" arguments:ACArgsPack(@(inOpId),@(inDataType),inData)];
+    [self.func executeWithArguments:ACArgsPack([inData JSONValue])];
+    self.func = nil;
 }
 -(void)uexOpenDatePickerWithConfigAndOpId:(int)inOpId tagID:(float)tag dataType:(int)inDataType data:(NSString*)inData{
     inData =[inData stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -421,16 +449,21 @@
     [dic removeObjectForKey:@"second"];
     dic[@"datePickerId"]= [NSString stringWithFormat:@"%f",tag];
     NSString *dateStr = [dic JSONFragment];
-    NSString *jsString = [NSString stringWithFormat:@"uexControl.cbOpenDatePickerWithConfig('%@');",dateStr];
-    [EUtility brwView:meBrwView evaluateScript:jsString];
+   // NSString *jsString = [NSString stringWithFormat:@"uexControl.cbOpenDatePickerWithConfig('%@');",dateStr];
+    //[EUtility brwView:meBrwView evaluateScript:jsString];
     //[self jsSuccessWithName:@"uexControl.cbOpenDatePickerWithConfig"  tagID:tag dataType:inDataType strData:inData];
+    [self.webViewEngine callbackWithFunctionKeyPath:@"uexControl.cbOpenDatePickerWithConfig" arguments:ACArgsPack(dateStr)];
+    [self.func executeWithArguments:ACArgsPack([dateStr JSONValue])];
+    self.func = nil;
 }
 -(void)containViewTap:(UITapGestureRecognizer *)gest{
     if (tv) {
         [tv resignFirstResponder];
         [tv removeFromSuperview];
         if (tv.text) {
-            [self jsSuccessWithName:@"uexControl.cbEditCompleted" opId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:tv.text];
+           // [self jsSuccessWithName:@"uexControl.cbEditCompleted" opId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:tv.text];
+            [self.webViewEngine callbackWithFunctionKeyPath:@"uexControl.cbEditCompleted" arguments:ACArgsPack(@0,@0,tv.text)];
+            
         }
     }
     [containView removeFromSuperview];
@@ -470,7 +503,8 @@
         }
     }
  
-    [EUtility brwView:meBrwView addSubview:tv];
+    //[EUtility brwView:meBrwView addSubview:tv];
+    [[self.webViewEngine webView] addSubview:tv];
 //    [EUtility brwView:meBrwView forbidRotate:YES];
 }
 
@@ -488,7 +522,9 @@
     [containView setAlpha:0.1];
     UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(containViewTap:)];
     [containView addGestureRecognizer:tapG];
-    [EUtility brwView:meBrwView addSubview:containView];
+   // [EUtility brwView:meBrwView addSubview:containView];
+    [[self.webViewEngine webView] addSubview:containView];
+
     [tapG release];
 }
 

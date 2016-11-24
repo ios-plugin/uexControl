@@ -176,7 +176,7 @@
 }
 -(void) keyboardWillShow:(NSNotification *)note{
     // get keyboard size and loctaion
-	CGRect keyboardBounds;
+    CGRect keyboardBounds;
     [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
     NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
@@ -184,20 +184,20 @@
     // Need to translate the bounds to account for rotation.
     keyboardBounds = [self convertRect:keyboardBounds toView:nil];
     
-	// get a rect for the textView frame
-	CGRect containerFrame = self.frame;
+    // get a rect for the textView frame
+    CGRect containerFrame = self.frame;
     containerFrame.origin.y = mainHeight - (keyboardBounds.size.height + containerFrame.size.height);
-	// animations settings
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationBeginsFromCurrentState:YES];
+    // animations settings
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:[duration doubleValue]];
     [UIView setAnimationCurve:[curve intValue]];
-	
-	// set views with new info
-	self.frame = containerFrame;
-	
-	// commit animations
-	[UIView commitAnimations];
+    
+    // set views with new info
+    self.frame = containerFrame;
+    
+    // commit animations
+    [UIView commitAnimations];
 }
 
 -(void) keyboardWillHide:(NSNotification *)note{

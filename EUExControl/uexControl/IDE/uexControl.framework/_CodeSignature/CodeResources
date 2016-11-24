@@ -6,11 +6,7 @@
 	<dict>
 		<key>Info.plist</key>
 		<data>
-		4d3KLQy3CCKOxKUBVOYz6/rgA28=
-		</data>
-		<key>embedded.mobileprovision</key>
-		<data>
-		JKbXoT98W7zj86Z2W3qbeHZe/kE=
+		MvU0guMTlh3COz62fl5rb0Ef2Lk=
 		</data>
 		<key>uexControl.bundle/en.lproj/Localizable.strings</key>
 		<dict>
@@ -33,17 +29,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>embedded.mobileprovision</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			JKbXoT98W7zj86Z2W3qbeHZe/kE=
-			</data>
-			<key>hash2</key>
-			<data>
-			0p8akoZIUNhnEHSrm+cwtP59I1VEbMUe0Gn2IpgCK98=
-			</data>
-		</dict>
 		<key>uexControl.bundle/en.lproj/Localizable.strings</key>
 		<dict>
 			<key>hash</key>
@@ -89,6 +74,11 @@
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
 		<key>^version.plist$</key>
 		<true/>
 	</dict>
@@ -133,6 +123,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>

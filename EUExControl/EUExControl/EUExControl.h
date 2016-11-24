@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EUExBase.h"
 #import "DatePicker.h"
 #import "InputDialog.h"
 #import "MonthPicker.h"
@@ -32,7 +31,7 @@
 @property (nonatomic, retain)MonthPicker *monthObj;
 @property (nonatomic, retain) InputDialog * inputObj;
 @property (nonatomic, assign) BOOL isDataPickerDidOpen;
-
+@property (nonatomic, strong) ACJSFunctionRef *func;
 
 -(void)uexOpenDatePickerWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString*)inData;
 -(void)uexOpenDatePickerWithConfigAndOpId:(int)inOpId tagID:(float)tag dataType:(int)inDataType data:(NSString*)inData;

@@ -143,14 +143,15 @@
     [mainView setBackgroundColor:[UIColor whiteColor]];
 	[mainView addSubview:pickerView];
 	if (![EUtility isIpad] || SCREEN_WIDTH == 320*APP_DEVICERATIO) {
-        [EUtility brwView:euexObj.meBrwView addSubview:mainView];
-        if (euexObj.meBrwView) {
+       // [EUtility brwView:euexObj.meBrwView addSubview:mainView];
+        [[euexObj.webViewEngine webView] addSubview:mainView];
+        if ([euexObj.webViewEngine webView]/*euexObj.meBrwView*/) {
             if ([EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
                 [UIView animateWithDuration:0.3 animations:^{
                     [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, 320*APP_DEVICERATIO, MAIN_HEIGHT)];
                 }];
             }
-            [(UIView*)euexObj.meBrwView setUserInteractionEnabled:NO];
+            [(UIView*)euexObj.webViewEngine.webView setUserInteractionEnabled:YES];
         }
  	}else {
 		UIViewController *controller = [[UIViewController alloc] init];
@@ -165,7 +166,9 @@
         //让pop窗口的位置在中间
         int x = SCREEN_WIDTH/2;
         int y = (SCREEN_HEIGHT-20)/2;
-        [EUtility brwView:euexObj.meBrwView presentPopover:popController FromRect:CGRectMake(x, y, 10, 10) permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        //[EUtility brwView:euexObj.meBrwView presentPopover:popController FromRect:CGRectMake(x, y, 10, 10) permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popController presentPopoverFromRect:CGRectMake(x, y, 10, 10) inView:euexObj.webViewEngine.webView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
 	}
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
@@ -212,14 +215,15 @@
     [mainView setBackgroundColor:[UIColor whiteColor]];
     [mainView addSubview:pickerView];
     if (![EUtility isIpad] || SCREEN_WIDTH == 320*APP_DEVICERATIO) {
-        [EUtility brwView:euexObj.meBrwView addSubview:mainView];
-        if (euexObj.meBrwView) {
+        //[EUtility brwView:euexObj.meBrwView addSubview:mainView];
+        [euexObj.webViewEngine.webView addSubview:mainView];
+        if (euexObj.webViewEngine.webView) {
             if ([EUtility isIpad] || deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
                 [UIView animateWithDuration:0.3 animations:^{
                     [mainView setFrame:CGRectMake(0, [EUtility screenHeight]-MAIN_HEIGHT, 320*APP_DEVICERATIO, MAIN_HEIGHT)];
                 }];
             }
-            [(UIView*)euexObj.meBrwView setUserInteractionEnabled:NO];
+            [(UIView*)euexObj.webViewEngine.webView setUserInteractionEnabled:YES];
         }
     }else {
         UIViewController *controller = [[UIViewController alloc] init];
@@ -234,7 +238,8 @@
         //让pop窗口的位置在中间
         int x = SCREEN_WIDTH/2;
         int y = (SCREEN_HEIGHT-20)/2;
-        [EUtility brwView:euexObj.meBrwView presentPopover:popController FromRect:CGRectMake(x, y, 10, 10) permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        //[EUtility brwView:euexObj.meBrwView presentPopover:popController FromRect:CGRectMake(x, y, 10, 10) permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popController presentPopoverFromRect:CGRectMake(x, y, 10, 10) inView:euexObj.webViewEngine.webView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
@@ -243,14 +248,15 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 	if (mainView) {
 		[mainView removeFromSuperview];
+        mainView = nil;
     }
     euexObj.isDataPickerDidOpen = NO;
 	return YES;
 }
 
 - (void)cancled:(id)headerView{
-    if (euexObj.meBrwView) {
-        [(UIView*)euexObj.meBrwView setUserInteractionEnabled:YES];
+    if (euexObj.webViewEngine.webView) {
+        [(UIView*)euexObj.webViewEngine.webView setUserInteractionEnabled:YES];
     }
     
     if (![EUtility isIpad] || SCREEN_WIDTH == 320*APP_DEVICERATIO) {
@@ -259,6 +265,7 @@
         } completion:^(BOOL finish){
             if (finish) {
                 [mainView removeFromSuperview];
+                mainView = nil;
             }
         }];
     }
@@ -271,14 +278,21 @@
 }
 
 - (void)confirm:(id)headerView{
-    if (euexObj.meBrwView) {
-        [(UIView*)euexObj.meBrwView setUserInteractionEnabled:YES];
+    if (euexObj.webViewEngine.webView) {
+        [(UIView*)euexObj.webViewEngine.webView setUserInteractionEnabled:YES];
     }
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 	if ([pickerType intValue] == 0) {
+        [selectValue removeObjectForKey:UEX_JKHOUR];
+        [selectValue removeObjectForKey:UEX_JKMUNUTE];
+        [selectValue removeObjectForKey:UEX_JKSECOND];
 		[euexObj uexOpenDatePickerWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_JSON data:[selectValue JSONFragment]];
         
 	}else if([pickerType intValue] == 1){
+        [selectValue removeObjectForKey:UEX_JKYEAR];
+         [selectValue removeObjectForKey:UEX_JKMONTH];
+        [selectValue removeObjectForKey:UEX_JKDAY];
+        [selectValue removeObjectForKey:UEX_JKSECOND];
 		[euexObj uexOpenTimerPickerWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_JSON data:[selectValue JSONFragment]];
     }else{
         [euexObj uexOpenDatePickerWithConfigAndOpId:0  tagID:self.tagID dataType:UEX_CALLBACK_DATATYPE_JSON data:[selectValue JSONFragment]];
@@ -292,6 +306,7 @@
         } completion:^(BOOL finish){
             if (finish) {
                 [mainView removeFromSuperview];
+                mainView = nil;
             }
         }];
     }
