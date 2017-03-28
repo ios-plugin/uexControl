@@ -257,9 +257,8 @@
         [UIView animateWithDuration:0.3 animations:^{
             [mainView setFrame:CGRectMake(0, [EUtility screenHeight], 320*APP_DEVICERATIO, MAIN_HEIGHT)];
         } completion:^(BOOL finish){
-            if (finish) {
-                [mainView removeFromSuperview];
-            }
+            [mainView removeFromSuperview];
+            mainView = nil;
         }];
     }
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -290,9 +289,9 @@
         [UIView animateWithDuration:0.3 animations:^{
             [mainView setFrame:CGRectMake(0, [EUtility screenHeight], 320*APP_DEVICERATIO, MAIN_HEIGHT)];
         } completion:^(BOOL finish){
-            if (finish) {
-                [mainView removeFromSuperview];
-            }
+            [mainView removeFromSuperview];
+            mainView = nil;
+            
         }];
     }
     if (popController) {
