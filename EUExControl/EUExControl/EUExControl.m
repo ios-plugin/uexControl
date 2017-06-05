@@ -341,6 +341,13 @@
 }
 //----------------------------------------------------------
 -(void)openDatePickerWithoutDay:(NSMutableArray *)inArguments{
+    
+    
+    if(self.monthObj != nil && self.monthObj.mainView != nil) { //已经打开
+        
+        return;
+    }
+    
     MonthPicker *tempObj = [[MonthPicker alloc] initWithEuex:self];
     self.monthObj = tempObj;
     [tempObj release];
